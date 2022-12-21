@@ -1,0 +1,15 @@
+---
+- hosts: webservers
+  vars:
+    - remote_user: "{{ remote_user }}"
+    - pg_admin_user : "postgres"
+
+  tasks:
+    - name: shareplex port setup
+      wbx_splex_setup:
+        port: 60066
+      become: yes
+      become_user: "{{pg_admin_user}}"
+      register: result
+
+    - debug: msg={{result}}

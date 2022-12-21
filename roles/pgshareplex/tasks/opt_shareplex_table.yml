@@ -1,0 +1,34 @@
+---
+- hosts: webservers
+  vars:
+    - remote_user: "{{ remote_user }}"
+    - pg_admin_user : "postgres"
+
+  tasks:
+    - name: add or remove tabel to shareplex config module
+      wbx_splex_table:
+        splex_port: 60064
+        source_db_name: "pgguweb"
+        source_schema_name: "test"
+        source_host_name: "amdbpgtest.webex.com"
+        target_db_name: "pggvweb"
+        target_schema_name: "test"
+        target_host_name: "amdbpgtest02.webex.com"
+        db_type: "r"
+        splex_comment: "###Modified by DA in release 60006 "
+        tablelist: {
+          "add_table":
+          {
+                "wbxmmconference":
+                {
+                  "base_key": "",
+                  "partition_h": "",
+                  "partition_v": ""
+                }
+          }
+      }
+      become: yes
+      become_user: "postgres"
+      register: result
+
+    - debug: msg={{result}}

@@ -1,0 +1,23 @@
+---
+- hosts: webservers
+  vars:
+    - remote_user: "{{ remote_user }}"
+    - port: "{{ port }}"
+    - pg_admin_user : "postgres"
+
+  tasks:
+    - name: operation shareplex process
+      wbx_splex_process:
+        port: 60064
+        state: start
+        process_type: "post"
+        db_type: "r"
+        source_db_name: "pgguweb"
+        target_db_name: "pggvweb"
+        source_host_name: "amdbpgtest.webex.com"
+        target_host_name: "amdbpgtest02.webex.com"
+      become: yes
+      become_user: "{{pg_admin_user}}"
+      register: result
+
+    - debug: msg={{result}}

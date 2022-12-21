@@ -1,0 +1,6 @@
+[all]
+localhost  ansible_connection=local
+[webservers]
+#sjgrcabt102  ansible_ssh_host=10.252.4.88 ansible_ssh_port=22 ansible_python_interpreter=/usr/bin/python3
+amdbpgtest ansible_ssh_host=amdbpgtest.webex.com ansible_ssh_port=22 ansible_python_interpreter=/usr/bin/python3
+#amdbpgtest02 ansible_ssh_host=amdbpgtest02.webex.com ansible_ssh_port=22 ansible_python_interpreter=/usr/bin/python3
